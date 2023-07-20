@@ -1,26 +1,20 @@
-// db.js
-const { Pool } = require('pg');
+const mysql = require('mysql');
 
-// Replace these with your PostgreSQL database credentials
-const dbConfig = {
-    user: 'mqywuitp',
-    password: '0O6_Uk10xbzUUnK24T-N2-WqExeMmYdF',
-    host: 'arjuna.db.elephantsql.com',
-    port: 5432,
-    database: 'mqywuitp',
-};
-
-const pool = new Pool(dbConfig);
-
-// Test the database connection
-pool.connect((err, client, done) => {
-    if (err) {
-        console.error('Error connecting to the database:', err);
-    } else {
-        console.log('Connected to the database successfully!');
-        // Release the client from the pool
-        done();
-    }
+// Configurer la connexion à la base de données MySQL
+const connection = mysql.createConnection({
+  host: 'mysql-kelysaina.alwaysdata.net',
+  user: 'kelysaina',
+  password: '0510KS0510',
+  database: 'kelysaina_jemima_db'
 });
 
-module.exports = pool;
+// Établir la connexion à la base de données
+connection.connect((err) => {
+  if (err) {
+    console.error('Erreur de connexion à la base de données :', err);
+  } else {
+    console.log('Connecté à la base de données MySQL');
+  }
+});
+
+module.exports = connection;

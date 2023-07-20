@@ -4,7 +4,7 @@ const cors = require('cors');
 const app = express();
 
 app.use(express.json());
-const pool = require('./db');
+const connection = require('./db');
 
 
 const PORT = 5000;
@@ -25,7 +25,7 @@ app.post('/login', async (req, res) => {
     try {
         // Retrieve the user with the provided username and password from the database
         const query = 'SELECT * FROM creds WHERE username = $1 AND password = $2';
-        const result = await pool.query(query, [username, password]);
+        const result = await connection.query(query, [username, password]);
 
         if (result.rows.length === 0) {
             // User not found or incorrect password
