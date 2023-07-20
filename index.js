@@ -17,7 +17,7 @@ app.get('/', async (req, res) => {
 
 
 // Login route
-app.get('/login', (req, res) => {
+app.post('/login', (req, res) => {
     const { username, password } = req.body;
 
     // Assuming your table structure has 'name' and 'password' columns
