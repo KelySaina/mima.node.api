@@ -1,6 +1,5 @@
 const mysql = require('mysql');
 
-// Configurer la connexion à la base de données MySQL
 const connection = mysql.createConnection({
   host: 'mysql-kelysaina.alwaysdata.net',
   user: 'kelysaina',
