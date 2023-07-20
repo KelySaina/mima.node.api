@@ -7,13 +7,14 @@ app.use(express.json());
 const pool = require('./db');
 
 
-const PORT = 3000;
+const PORT = 5000;
 
 app.use(cors());
 
 
 // Login route
 app.post('/login', async (req, res) => {
+	
     const { username, password } = req.body;
 
 
@@ -24,14 +25,14 @@ app.post('/login', async (req, res) => {
 
         if (result.rows.length === 0) {
             // User not found or incorrect password
-            return res.status(401).json({ error: 'Invalid username or password' });
+            return res.json({ message: 'Invalid username or password' });
         }
 
         // Successful login
         res.json({ message: 'Login successful!' });
     } catch (error) {
         console.error('Error during login:', error);
-        res.status(500).json({ error: 'Internal server error' });
+        res.json({ message: 'Internal server error' });
     }
 });
 
