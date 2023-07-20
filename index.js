@@ -13,7 +13,7 @@ app.use(cors());
 
 
 // Login route
-app.get('/login', async (req, res) => {
+app.post('/login', async (req, res) => {
     const { username, password } = req.body;
 
 
