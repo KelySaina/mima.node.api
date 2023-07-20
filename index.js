@@ -23,7 +23,7 @@ app.post('/login', (req, res) => {
     // Assuming your table structure has 'name' and 'password' columns
     connection.query(
         'SELECT * FROM creds WHERE username = ? AND password = ?',
-        [nom, mdp],
+        [username, password],
         (err, rows) => {
             if (err) {
                 console.error('Erreur lors de la récupération de login :', err);
