@@ -1,4 +1,4 @@
-const mysql = require('mysql')
+const mysql = require('mysql');
 
 const connection = mysql.createConnection({
   host: 'mysql-kelysaina.alwaysdata.net',
@@ -7,7 +7,6 @@ const connection = mysql.createConnection({
   database: 'kelysaina_jemima_db'
 });
 
-// Établir la connexion à la base de données
 connection.connect((err) => {
   if (err) {
     console.error('Erreur de connexion à la base de données :', err);
