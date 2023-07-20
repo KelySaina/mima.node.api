@@ -14,10 +14,8 @@ app.use(cors());
 
 // Login route
 app.get('/login', async (req, res) => {
-    //const { username, password } = req.body;
+    const { username, password } = req.body;
 
-    const username = "thyler"
-    const password = "k"
 
     try {
         // Retrieve the user with the provided username and password from the database
