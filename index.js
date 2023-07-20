@@ -11,33 +11,32 @@ const PORT = 5000;
 
 app.use(cors());
 
-app.get('/',async (req, res)=>{
-	return res.json({message:'Welcome to mima.api'})
+app.get('/', async (req, res) => {
+    return res.json({ message: 'Welcome to mima.api' })
 })
 
 
 // Login route
-app.post('/login', async (req, res) => {
-	
+app.get('/login', (req, res) => {
     const { username, password } = req.body;
 
-
-    try {
-        // Retrieve the user with the provided username and password from the database
-        const query = 'SELECT * FROM creds WHERE username = $1 AND password = $2';
-        const result = await connection.query(query, [username, password]);
-
-        if (result.rows.length === 0) {
-            // User not found or incorrect password
-            return res.json({ message: 'Invalid username or password' });
+    // Assuming your table structure has 'name' and 'password' columns
+    connection.query(
+        'SELECT * FROM creds WHERE username = ? AND password = ?',
+        [nom, mdp],
+        (err, rows) => {
+            if (err) {
+                console.error('Erreur lors de la récupération de login :', err);
+                res.status(500).send('Erreur lors de la récupération de login');
+            } else {
+                if (rows.length === 0) {
+                    res.status(401).send('Nom d\'utilisateur ou mot de passe incorrect');
+                } else {
+                    res.status(200).send('Authentification réussie');
+                }
+            }
         }
-
-        // Successful login
-        res.json({ message: 'Login successful!' });
-    } catch (error) {
-        console.error('Error during login:', error);
-        res.json({ message: 'Internal server error' });
-    }
+    );
 });
 
 app.listen(PORT, () => {
