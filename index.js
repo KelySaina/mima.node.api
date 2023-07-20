@@ -11,6 +11,10 @@ const PORT = 5000;
 
 app.use(cors());
 
+app.get('/',async (req, res)=>{
+	return res.json({message:'Welcome to mima.api'})
+})
+
 
 // Login route
 app.post('/login', async (req, res) => {
