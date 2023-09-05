@@ -1,9 +1,0 @@
-{
-  "presets": [
-    ["@babel/preset-env"]
-  ],
-  "plugins": [
-    // Add any additional plugins you need
-  ],
-  "outDir": "./build"
-}
