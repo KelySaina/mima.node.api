@@ -7,7 +7,7 @@ app.use(express.json());
 const connection = require('./db');
 
 
-const PORT = 1060;
+const PORT = 4444;
 
 app.use(cors());
 
