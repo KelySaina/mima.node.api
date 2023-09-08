@@ -44,8 +44,8 @@
   tasks:
     - name: Copy application files excluding node_modules
       synchronize:
-        src: "/home/thyler/testProjets/NODE/node2/"
-        dest: "/home/thyler/node2"
+        src: "/var/lib/jenkins/workspace/mima.pipeline"
+        dest: "/home/thyler/node3"
         delete: yes
         recursive: yes
         rsync_opts:
@@ -58,14 +58,14 @@
     - name: Install dependencies
       command: npm install
       args:
-        chdir: /home/thyler/node2
+        chdir: /home/thyler/node3
 
     #- name: Start the application
     #  command: node index.js
     #  async: 0
     #  poll: 0
     - name: Start Node.js application in the background
-      shell: "nohup node /home/thyler/node2/index.js > /dev/null 2>&1 &"
+      shell: "nohup node /home/thyler/node3/index.js > /dev/null 2>&1 &"
 
 - name: Finished
   hosts: nodejs_servers
