@@ -24,7 +24,7 @@
 
     - name: Start the application
       command: node index.js
-      async: 100
+      async: 604800 #the server will run for one week aftereach build
       poll: 0
       args:
         chdir: /home/thyler/mima.pipeline/mima.pipeline
