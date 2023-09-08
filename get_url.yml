@@ -1,0 +1,25 @@
+---
+- name: Check Service Status
+  hosts: nodejs_servers
+  become: yes
+
+  tasks:
+    - name: Get Service Status
+      command: service forward_url status
+      register: service_status_raw
+
+    - name: Filter Service Status
+      set_fact:
+        service_status_filtered: "{{ service_status_raw.stdout_lines | select('search', 'Forwarding HTTP') | list }}"
+
+    - name: Display Service Status
+      debug:
+        var: service_status_filtered
+
+    - name: Extract URL from filtered line
+      set_fact:
+        forwarding_url: "{{ service_status_filtered[0].split(' ')[-1] }}"
+
+    - name: Display URL
+      debug:
+        msg: "URL: {{forwarding_url}} "
