@@ -42,21 +42,34 @@
   become: yes
 
   tasks:
-    - name: Copy application files
-      copy:
-        src: /home/thyler/testProjets/NODE/node2
-        dest: ~
+    - name: Copy application files excluding node_modules
+      synchronize:
+        src: "/home/thyler/testProjets/NODE/node2/"
+        dest: "/home/thyler/node2"
         delete: yes
         recursive: yes
         rsync_opts:
           - "--exclude=node_modules/"
+      become: no
+
+
+
 
     - name: Install dependencies
       command: npm install
       args:
-        chdir: ~
+        chdir: /home/thyler/node2
 
-    - name: Start the application
-      command: node index.js
-      args:
-        chdir: ~
+    #- name: Start the application
+    #  command: node index.js
+    #  async: 0
+    #  poll: 0
+    - name: Start Node.js application in the background
+      shell: "nohup node /home/thyler/node2/index.js > /dev/null 2>&1 &"
+
+- name: Finished
+  hosts: nodejs_servers
+  become: yes
+  tasks:
+    - name: Ansible finished
+      command: echo Finished
