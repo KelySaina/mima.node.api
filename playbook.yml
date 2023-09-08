@@ -1,42 +1,4 @@
 ---
-- name: Install Node.js and npm
-  hosts: nodejs_servers
-  become: yes
-
-  tasks:
-    - name: Check if package lists are updated
-      stat:
-        path: /var/lib/apt/lists/lock
-      register: apt_lists_lock
-
-    - name: Update package lists
-      apt:
-        update_cache: yes
-      when: apt_lists_lock.stat.exists == false
-
-    - name: Check if Node.js is installed
-      command: node -v
-      register: node_version
-      ignore_errors: true
-
-    - name: Install Node.js
-      apt:
-        name: nodejs
-        state: present
-      when: node_version.rc != 0
-
-    - name: Check if npm is installed
-      command: npm -v
-      register: npm_version
-      ignore_errors: true
-
-    - name: Install npm
-      apt:
-        name: npm
-        state: present
-      when: npm_version.rc != 0
-
-
 - name: Deploy Your Node.js Application
   hosts: nodejs_servers
   become: yes
@@ -58,12 +20,15 @@
     - name: Install dependencies
       command: npm install
       args:
-        chdir: /home/thyler/mima.pipeline
+        chdir: /home/thyler/mima.pipeline/mima.pipeline
 
     - name: Start the application
       command: node index.js
-      async: 600
+      async: 100
       poll: 0
+      args:
+        chdir: /home/thyler/mima.pipeline/mima.pipeline
+
     #- name: Start Node.js application in the background
     #  shell: "nohup node index.js > /dev/null 2>&1 &"
 
