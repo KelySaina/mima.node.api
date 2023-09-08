@@ -72,4 +72,4 @@
   become: yes
   tasks:
     - name: Ansible finished
-      command: echo Finished
+      command: echo Deployed
