@@ -12,7 +12,7 @@ const PORT = 4444;
 app.use(cors());
 
 app.get('/', async (req, res) => {
-    return res.json({ message: 'Welcome to mima.api' })
+    return res.json({ message: 'Welcome to mima.ks.api' })
 })
 
 

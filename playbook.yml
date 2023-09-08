@@ -60,12 +60,12 @@
       args:
         chdir: /home/thyler/mima.pipeline
 
-    #- name: Start the application
-    #  command: node index.js
-    #  async: 0
-    #  poll: 0
-    - name: Start Node.js application in the background
-      shell: "nohup node /home/thyler/mima.pipeline/index.js > /dev/null 2>&1 &"
+    - name: Start the application
+      command: node index.js
+      async: 600
+      poll: 0
+    #- name: Start Node.js application in the background
+    #  shell: "nohup node index.js > /dev/null 2>&1 &"
 
 - name: Finished
   hosts: nodejs_servers
